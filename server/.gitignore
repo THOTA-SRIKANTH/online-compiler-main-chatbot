@@ -1,0 +1,10 @@
+yarn-debug.log
+yarn-error.log
+dist
+node_modules/
+.env
+*.log
+lib-cov.html
+jest.config.js
+verdacc.html
+build

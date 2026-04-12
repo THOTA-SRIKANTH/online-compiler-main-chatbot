@@ -1,0 +1,8 @@
+dist
+dist-ssr
+*.local
+node_modules/
+
+.env
+.env.production
+lerna-debug.log*

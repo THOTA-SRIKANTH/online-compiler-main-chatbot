@@ -1,0 +1,141 @@
+//get all repos
+GET http://localhost:8000/repo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1c2hpQGdtYWlsLmNvbSIsImlhdCI6MTczNTU0NTQ2NiwiZXhwIjoxNzM4MTM3NDY2fQ.LIb10TOp6oxCrqwxmnLv3fXXTPRfm4wAsv31ONHAOPQ
+
+###
+//create a new repo
+POST http://localhost:8000/repo/new
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1c2hpQGdtYWlsLmNvbSIsImlhdCI6MTczNTU0NTQ2NiwiZXhwIjoxNzM4MTM3NDY2fQ.LIb10TOp6oxCrqwxmnLv3fXXTPRfm4wAsv31ONHAOPQ
+Content-Type: application/json
+
+{
+    "name":"project"
+}
+
+
+
+###
+//add new file
+POST http://localhost:8000/file/new
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1c2hpQGdtYWlsLmNvbSIsImlhdCI6MTczNTU0NTQ2NiwiZXhwIjoxNzM4MTM3NDY2fQ.LIb10TOp6oxCrqwxmnLv3fXXTPRfm4wAsv31ONHAOPQ
+Content-Type: application/json
+
+{
+    "name":"new.java",
+    "type":"java",
+    "parent":"67725fba8b038690f9509dfc"
+}
+
+
+###
+//get a repo by id
+GET http://localhost:8000/repo/676c07a82529a50a092df37d
+
+
+
+###
+//Run python code
+POST http://localhost:8000/code/run
+Content-Type: application/json
+
+{
+    "extension":"py",
+    "code":"print(\"Hello\")"
+}
+
+###
+//Run java code 
+POST http://localhost:8000/code/run
+Content-Type: application/json
+
+{
+    "extension":"java",
+    "code": "public class Temp {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}"
+}
+
+
+###
+//run js code 
+
+POST http://localhost:8000/code/run
+Content-Type: application/json
+
+{
+    "extension":"js",
+    "code": "console.log('Hello world')"
+}
+
+
+###
+
+POST http://localhost:8000/api/user/add-teammate
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1c2hpQGdtYWlsLmNvbSIsImlhdCI6MTczNTU0NTQ2NiwiZXhwIjoxNzM4MTM3NDY2fQ.LIb10TOp6oxCrqwxmnLv3fXXTPRfm4wAsv31ONHAOPQ
+Content-Type: application/json
+
+{
+    "email":"priya@gmail.com"
+}
+
+
+###
+
+GET http://localhost:8000/test-mail
+
+
+###
+//register
+POST http://localhost:8000/api/user/register
+Content-Type: application/json
+
+{
+    "name":"rushi",
+    "email":"kingrushendra109@gmail.com",
+    "password":"1234"
+}
+
+###
+//verify-email
+POST http://localhost:8000/api/user/verify-email
+Content-Type: application/json
+
+{
+    "email":"kingrushendra109@gmail.com",
+    "otp":"o5aunf"
+}
+
+
+###
+//login
+POST http://localhost:8000/api/user/login
+Content-Type: application/json
+
+{
+    "email":"kingrushendra109@gmail.com",
+    "password":"1234"
+}
+
+
+###
+
+POST https://script.google.com/macros/s/AKfycbzInWNyDO_UZurwLK2nlWKFtnek3Oa-ZTX1ScCd-WAs4INAamwzRvsWhiQXD-er8XY/exec
+Content-Type: application/json
+
+{
+    "name":"Aashta Agarbatti 30.00",
+    "imageUrl":"test.jpg"
+}
+
+
+###
+POST https://api.cloudinary.com/v1_1/dcbtgukde/image/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"
+
+https://th.bing.com/th/id/OIP.vpUUrAb6H7eMCIM4TRzpcAHaFj?cb=iwp2&rs=1&pid=ImgDetMain
+--WebAppBoundary
+Content-Disposition: form-data; name="upload_preset"
+
+testuploadpreset
+--WebAppBoundary--
