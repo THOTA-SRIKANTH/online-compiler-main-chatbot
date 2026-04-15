@@ -15,13 +15,23 @@ import chatRoutes from "./routes/chatRoutes.js";
 connectDb();
 
 const app = express();
-
-// Production-safe CORS (AWS guide 2.3.2)
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  methods: ['GET', 'POST', 'DELETE', 'PUT'],
+const corsOptions = {
+  origin: [
+    process.env.CLIENT_URL,                                      // EC2 Elastic IP
+    "https://online-compiler-frontend-codemeet.s3.amazonaws.com", // S3 bucket direct
+    "https://d123ABC.cloudfront.net",                            // if using CloudFront (replace with your dist ID)
+    "http://localhost:5173",                                     // local dev
+    "http://localhost:3000",                                     // local dev alt
+  ],
+  methods: ["GET", "POST", "DELETE", "PUT", "OPTIONS"],
+  allowedHeaders: [
+    "Origin", "X-Requested-With",
+    "Content-Type", "Accept", "Authorization"
+  ],
   credentials: true
-}));
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -29,14 +39,19 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
-    methods: ['GET', 'POST']
+    origin: [
+      process.env.CLIENT_URL,                                      // EC2 Elastic IP
+      "https://online-compiler-frontend-codemeet.s3.amazonaws.com", // S3 bucket
+      "https://d123ABC.cloudfront.net",                            // CloudFront (if used)
+      "http://localhost:5173",                                     // local dev
+      "http://localhost:3000",                                     // local dev alt
+    ],
+    methods: ["GET", "POST"],
+    credentials: true
   },
-  // Prevent server crash on reconnect: longer ping intervals, more retries
   pingTimeout: 60000,
   pingInterval: 25000,
   transports: ["websocket", "polling"],
-  allowEIO3: true
 });
 
 // rooms[roomId] = { participants: [{ socketId, userId, name }], iceCandidates: {} }
