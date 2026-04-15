@@ -4,5 +4,4 @@ dist-ssr
 node_modules/
 
 .env
-.env.production
 lerna-debug.log*
